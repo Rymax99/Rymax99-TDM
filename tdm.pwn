@@ -1,6 +1,5 @@
 //Primarily developed by Ryan, Wolf, and Mean
-//Released by Rymax99 on the SA-MP forums (http://forum.sa-mp.com/member.php?u=173600)
-//LAST COMMIT: 11/11/14
+//Script by Rymax99 on the SA-MP forums (http://forum.sa-mp.com/member.php?u=173600)
 
 #include <a_samp>
 #undef  MAX_PLAYERS
@@ -1757,7 +1756,6 @@ public OnPlayerDisconnect(playerid,reason)
 	Blocked[playerid] = 0;
 	firstspawn[playerid] = 0;
 	gPlayerInfo[playerid][adminhide] = 0;
-	//gPlayerInfo[playerid][pOldlevel] = gPlayerInfo[playerid][pOldlevel];
     Kicked[playerid] = 0;
 	SpamCount[playerid] = 0;
 	namechange[playerid] = 0;
@@ -7179,6 +7177,7 @@ public OnPlayerStateChange(playerid,newstate,oldstate)
 				SendClientMessage(playerid, COLOR_RED, "Press the ~k~~VEHICLE_FIREWEAPON~ to drop a bomb!");
 				bombable[playerid] = 1;
 			}
+			
 			if(cartype == 432) //rhino
 			{
 				if (gPlayerInfo[playerid][pClass]!=CLASS_ENGINEER)
@@ -7216,6 +7215,7 @@ public OnPlayerStateChange(playerid,newstate,oldstate)
 					SendClientMessage(playerid, enterhvehicle);
 				}
 			}
+			
 			if(cartype == 520) //hydra
 			{
 				if (gPlayerInfo[playerid][pClass]!=CLASS_PILOT)
@@ -7248,6 +7248,7 @@ public OnPlayerStateChange(playerid,newstate,oldstate)
 					SendClientMessage(playerid, enterhvehicle);
 				}
 			}
+			
 			if(cartype == 425) //hunter
 			{
 				if(gPlayerInfo[playerid][pClass]!=CLASS_PILOT)
@@ -7280,6 +7281,7 @@ public OnPlayerStateChange(playerid,newstate,oldstate)
 					SendClientMessage(playerid, enterhvehicle);
 				}
 			}
+			
 			if(cartype == 447) //seasparrow
 			{
 				if(gPlayerInfo[playerid][pClass]!=CLASS_PILOT)
@@ -7312,6 +7314,7 @@ public OnPlayerStateChange(playerid,newstate,oldstate)
 					SendClientMessage(playerid, enterhvehicle);
 				}
 			}
+			
 			if(IsBombPlane(GetVehicleModel(vehicleid))) //bombing planes(nevada/rustler)
 			{
 				if(gPlayerInfo[playerid][pClass] == CLASS_SNIPER)
@@ -7320,11 +7323,12 @@ public OnPlayerStateChange(playerid,newstate,oldstate)
 					SendClientMessage(playerid, COLOR_RED, "Snipers can't fly airplanes with bombs!");
 				}
 			}
+			
 			if(cartype == 416 && gPlayerInfo[playerid][pClass] != CLASS_MEDIC) //ambulance
 			{
 				RemovePlayerFromVehicle(playerid);
 				SendClientMessage(playerid, COLOR_RED, "You must be a medic to drive an ambulance.");
-			}
+			}	
 		} //EO aduty check == 0 for restricted vehicles
 	}
 	else if (newstate == PLAYER_STATE_PASSENGER)
@@ -7420,6 +7424,7 @@ PUB:JustSpawned(playerid)
 		}
 	}
 }
+
 PUB:EndSKDuel(playerid)
 {
 	new string[128];
@@ -7480,17 +7485,19 @@ UpdateRank(playerid)
 public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
 	if(GetPVarInt(playerid, "Frozen") == 1) TogglePlayerControllable(playerid, false);
+
 	/*
-    if(GetPlayerState(playerid) == PLAYER_STATE_SPECTATING && GetPVarInt(playerid, "CurrentID") != INVALID_PLAYER_ID )
-	{
-		if(newkeys & KEY_JUMP) AdvanceSpectate(playerid);
-		else if(newkeys & KEY_SPRINT) ReverseSpectate(playerid);
-		else if(newkeys & KEY_FIRE) AdvanceSpectate(playerid);
-		else if(newkeys & KEY_HANDBRAKE) ReverseSpectate(playerid);
-		else if(newkeys & KEY_CROUCH) StopSpectate(playerid);
-		if(GetPlayerState(playerid) == PLAYER_STATE_SPECTATING && GetPVarInt(playerid, "CurrentiD") == INVALID_PLAYER_ID ) return AdvanceSpectate(playerid);
-	}
+		if(GetPlayerState(playerid) == PLAYER_STATE_SPECTATING && GetPVarInt(playerid, "CurrentID") != INVALID_PLAYER_ID )
+		{
+			if(newkeys & KEY_JUMP) AdvanceSpectate(playerid);
+			else if(newkeys & KEY_SPRINT) ReverseSpectate(playerid);
+			else if(newkeys & KEY_FIRE) AdvanceSpectate(playerid);
+			else if(newkeys & KEY_HANDBRAKE) ReverseSpectate(playerid);
+			else if(newkeys & KEY_CROUCH) StopSpectate(playerid);
+			if(GetPlayerState(playerid) == PLAYER_STATE_SPECTATING && GetPVarInt(playerid, "CurrentiD") == INVALID_PLAYER_ID ) return AdvanceSpectate(playerid);
+		}
 	*/
+	
 	if(newkeys & KEY_CROUCH && GetPlayerState(playerid)==PLAYER_STATE_SPECTATING) StopSpectate(playerid);
 	if(GetPVarInt(playerid, "aFly") == 1)
 	{
@@ -7508,6 +7515,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
             }
 	    }
 	}
+	
 	if(newkeys & KEY_CROUCH) {
 	    if(GetPVarInt(playerid, "RC") == 1) {
             if(!IsPlayerInAnyVehicle(playerid)) {
@@ -7526,6 +7534,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
             } else return SendClientMessage(playerid,COLOR_RED,"You cannot be in a vehicle and have an RC-XD!");
 		}
 	}
+	
 	if(newkeys & KEY_SUBMISSION) {
 	    if(GetPVarInt(playerid,"ERC") == 1) {
             SetPVarInt(playerid, "ERC", 0);
@@ -7543,6 +7552,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
             defer RCexplode(playerid);
         }
 	}
+	
     if(newkeys & KEY_SECONDARY_ATTACK) {
         new vid = GetPlayerVehicleID(playerid);
         new Float:hp;
@@ -7557,11 +7567,15 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	    	SendClientMessage(playerid, COLOR_RED, "Emergency ejected!");
 		}
 	}
+	
 	if(newkeys & KEY_FIRE && IsBombPlane(GetVehicleModel(GetPlayerVehicleID(playerid))) && GetPVarInt(playerid, "AdminDuty") == 0 )
 	{
 		new vid = GetPlayerVehicleID(playerid);
 		if(bombs[vid] < 1) return SendClientMessage(playerid, COLOR_ORANGE, "There are no bombs remaining in this plane.");
+		
+		//code included in the event you want to limit the players able to use bombs
 		//if(GetPlayerScore(playerid) >= 750) return SendClientMessage(playerid, COLOR_RED, "You can't use these bombs!");
+		
 		if(bombable[playerid] == 1) {
 			new Float:x, Float:y, Float:z, Float:ground;
 			GetVehiclePos(GetPlayerVehicleID(playerid), x, y, z);
@@ -7675,6 +7689,7 @@ public OnPlayerUpdate(playerid)
 		}
 		armedbody_pTick[playerid] = GetTickCount();
 	}
+	
 	//FPS
 	new drunknew;
     drunknew = GetPlayerDrunkLevel(playerid);
@@ -7694,6 +7709,7 @@ public OnPlayerUpdate(playerid)
         
     }
 	//EO FPS
+	
 	iAFKp[playerid] = 0;
 	return true;
 }
@@ -7708,6 +7724,7 @@ public OnPlayerStreamIn(playerid, forplayerid)
 }
 
 /*
+
 stock AdvanceSpectate(playerid)
 {
 	if(GetPlayerState(playerid) == PLAYER_STATE_SPECTATING && GetPVarInt(playerid, "CurrentID") != INVALID_PLAYER_ID)
