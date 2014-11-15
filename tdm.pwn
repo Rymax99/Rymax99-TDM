@@ -3,7 +3,7 @@
 
 #include <a_samp>
 #undef  MAX_PLAYERS
-#define MAX_PLAYERS 50
+#define MAX_PLAYS GetMaxPlayers()
 #include <zcmd>
 #include <sscanf2>
 #include <mysql>
