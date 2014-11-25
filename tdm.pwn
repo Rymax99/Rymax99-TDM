@@ -1131,8 +1131,8 @@ public OnGameModeInit()
 	
 	//mysql = mysql_init(LOG_ONLY_ERRORS);
 	mysql = mysql_init(LOG_ALL);
-    mysql_connect(host, user, pass, db, mysql, 1);
-
+    new connection = mysql_connect(host, user, pass, db, mysql, 1);
+    if(mysql_errno() != 00)  printf("There was an issue with connecting to the MySQL server.");
 	for(new i=0;i<MAX_PLAYERS;i++)
 	{
 		txtStats[i] = TextDrawCreate(142.500000,362.500000," ");
